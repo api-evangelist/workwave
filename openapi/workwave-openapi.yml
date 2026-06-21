@@ -1,0 +1,950 @@
+openapi: 3.0.1
+info:
+  title: WorkWave Route Manager API
+  description: >-
+    The WorkWave Route Manager (WWRM) REST API connects order-management systems
+    to RouteManager's route planning and optimization engine. It exposes
+    resources for territories, depots, regions, companies, drivers, vehicles,
+    orders, optimized routes (Time of Arrival), and GPS tracking. Requests that
+    add, update, or delete data are asynchronous: they return a requestId
+    immediately and the final outcome is delivered to a configured webhook
+    callback URL. Authentication uses an API key (a UUID) passed either as the
+    `key` query-string parameter or the `X-WorkWave-Key` HTTP header.
+  termsOfService: https://www.workwave.com/terms-of-service/
+  contact:
+    name: WorkWave Support
+    url: https://www.workwave.com/contact-us/
+  version: '1.0'
+servers:
+  - url: https://wwrm.workwave.com/api/v1
+    description: WorkWave Route Manager production API
+security:
+  - ApiKeyHeader: []
+  - ApiKeyQuery: []
+tags:
+  - name: Callback
+    description: Manage the webhook callback URL for asynchronous notifications.
+  - name: Territories
+    description: List and edit territories and their planning range.
+  - name: Companies
+    description: Manage companies.
+  - name: Depots
+    description: Manage depots within a territory.
+  - name: Regions
+    description: Manage regions within a territory.
+  - name: Drivers
+    description: Manage the driver roster within a territory.
+  - name: Vehicles
+    description: Manage the vehicle fleet within a territory.
+  - name: Orders
+    description: Manage orders within a territory.
+  - name: Routes
+    description: Retrieve optimized routes and Time of Arrival data.
+  - name: GPS
+    description: Retrieve GPS tracking and location data.
+  - name: Validation
+    description: Validate contact emails and phone numbers.
+paths:
+  /callback:
+    get:
+      operationId: getCallback
+      tags:
+        - Callback
+      summary: Retrieve the configured callback URL.
+      responses:
+        '200':
+          description: The current callback configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Callback'
+    post:
+      operationId: setCallback
+      tags:
+        - Callback
+      summary: Set or update the callback URL for asynchronous notifications.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Callback'
+      responses:
+        '200':
+          description: Callback URL set.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    delete:
+      operationId: deleteCallback
+      tags:
+        - Callback
+      summary: Remove the configured callback URL.
+      responses:
+        '200':
+          description: Callback URL removed.
+  /companies:
+    get:
+      operationId: listCompanies
+      tags:
+        - Companies
+      summary: List companies.
+      responses:
+        '200':
+          description: A list of companies.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Company'
+    post:
+      operationId: addCompany
+      tags:
+        - Companies
+      summary: Add a company.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /companies/{companyId}:
+    parameters:
+      - $ref: '#/components/parameters/companyId'
+    put:
+      operationId: updateCompany
+      tags:
+        - Companies
+      summary: Replace a company.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Company'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteCompany
+      tags:
+        - Companies
+      summary: Delete a company.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories:
+    get:
+      operationId: listTerritories
+      tags:
+        - Territories
+      summary: List all territories accessible to the API key.
+      responses:
+        '200':
+          description: A list of territories.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Territory'
+  /territories/{territoryId}:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    put:
+      operationId: editTerritory
+      tags:
+        - Territories
+      summary: Edit a territory's preferences.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Territory'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/planningrange:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    put:
+      operationId: editPlanningRange
+      tags:
+        - Territories
+      summary: Modify the planning range of a territory.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanningRange'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/depots:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listDepots
+      tags:
+        - Depots
+      summary: List depots in a territory.
+      responses:
+        '200':
+          description: A list of depots.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Depot'
+    post:
+      operationId: addDepots
+      tags:
+        - Depots
+      summary: Add one or more depots.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Depot'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    put:
+      operationId: updateDepots
+      tags:
+        - Depots
+      summary: Update one or more depots.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Depot'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteDepots
+      tags:
+        - Depots
+      summary: Delete one or more depots.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/regions:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listRegions
+      tags:
+        - Regions
+      summary: List regions in a territory.
+      responses:
+        '200':
+          description: A list of regions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Region'
+    post:
+      operationId: addRegions
+      tags:
+        - Regions
+      summary: Add one or more regions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Region'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    put:
+      operationId: replaceRegions
+      tags:
+        - Regions
+      summary: Replace one or more regions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Region'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteRegions
+      tags:
+        - Regions
+      summary: Delete one or more regions.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/drivers:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listDrivers
+      tags:
+        - Drivers
+      summary: List drivers in a territory.
+      responses:
+        '200':
+          description: A list of drivers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Driver'
+    post:
+      operationId: addDriver
+      tags:
+        - Drivers
+      summary: Add a driver.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Driver'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    put:
+      operationId: updateDrivers
+      tags:
+        - Drivers
+      summary: Update multiple drivers.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Driver'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/drivers/{driverId}:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+      - $ref: '#/components/parameters/driverId'
+    put:
+      operationId: replaceDriver
+      tags:
+        - Drivers
+      summary: Replace a driver.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Driver'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteDriver
+      tags:
+        - Drivers
+      summary: Delete a driver.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/vehicles:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listVehicles
+      tags:
+        - Vehicles
+      summary: List vehicles in a territory.
+      responses:
+        '200':
+          description: A list of vehicles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+    post:
+      operationId: addVehicles
+      tags:
+        - Vehicles
+      summary: Add one or more vehicles.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Vehicle'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteVehicles
+      tags:
+        - Vehicles
+      summary: Delete multiple vehicles.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/vehicles/{vehicleId}:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+      - $ref: '#/components/parameters/vehicleId'
+    get:
+      operationId: getVehicle
+      tags:
+        - Vehicles
+      summary: Get a vehicle's normal-day settings.
+      responses:
+        '200':
+          description: Vehicle settings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+    post:
+      operationId: replaceVehicle
+      tags:
+        - Vehicles
+      summary: Replace a vehicle's normal-day settings.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteVehicle
+      tags:
+        - Vehicles
+      summary: Delete a single vehicle.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/vehicles/{vehicleId}/{date}:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+      - $ref: '#/components/parameters/vehicleId'
+      - $ref: '#/components/parameters/date'
+    get:
+      operationId: getVehicleForDate
+      tags:
+        - Vehicles
+      summary: Get a vehicle's settings for a specific date.
+      responses:
+        '200':
+          description: Vehicle settings for the date.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+    post:
+      operationId: replaceVehicleForDate
+      tags:
+        - Vehicles
+      summary: Replace a vehicle's settings for a specific date.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/vehicles/{date}:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+      - $ref: '#/components/parameters/date'
+    get:
+      operationId: listVehiclesForDate
+      tags:
+        - Vehicles
+      summary: List all vehicle settings for a specific date.
+      responses:
+        '200':
+          description: Vehicle settings for the date.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+  /territories/{territoryId}/orders:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listOrders
+      tags:
+        - Orders
+      summary: List orders in a territory.
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      operationId: addOrders
+      tags:
+        - Orders
+      summary: Add one or more orders.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    put:
+      operationId: updateOrders
+      tags:
+        - Orders
+      summary: Update one or more orders.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteOrders
+      tags:
+        - Orders
+      summary: Delete one or more orders.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/toa/routes:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listToaRoutes
+      tags:
+        - Routes
+      summary: List optimized routes (Time of Arrival) for a territory.
+      responses:
+        '200':
+          description: A list of optimized routes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+  /territories/{territoryId}/toa/routes/{routeId}:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+      - name: routeId
+        in: path
+        required: true
+        description: Route identifier, typically in the form {routeId}-{date}.
+        schema:
+          type: string
+    get:
+      operationId: getToaRoute
+      tags:
+        - Routes
+      summary: Retrieve a single optimized route with Time of Arrival details.
+      responses:
+        '200':
+          description: The optimized route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /territories/{territoryId}/approved/routes:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listApprovedRoutes
+      tags:
+        - Routes
+      summary: Retrieve approved route plan data for a territory.
+      responses:
+        '200':
+          description: A list of approved routes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+  /territories/{territoryId}/gps:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: getGpsData
+      tags:
+        - GPS
+      summary: Retrieve GPS tracking and real-time location data for a territory.
+      responses:
+        '200':
+          description: GPS tracking data.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GpsPosition'
+  /territories/{territoryId}/validation/contacts:
+    parameters:
+      - $ref: '#/components/parameters/territoryId'
+    post:
+      operationId: validateContacts
+      tags:
+        - Validation
+      summary: Validate emails and phone numbers.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactValidationRequest'
+      responses:
+        '200':
+          description: Validation results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactValidationResult'
+components:
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-WorkWave-Key
+      description: API key (UUID) supplied via the X-WorkWave-Key HTTP header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: API key (UUID) supplied via the `key` query-string parameter. Takes precedence over the header if both are present.
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+    driverId:
+      name: driverId
+      in: path
+      required: true
+      schema:
+        type: string
+    vehicleId:
+      name: vehicleId
+      in: path
+      required: true
+      schema:
+        type: string
+    date:
+      name: date
+      in: path
+      required: true
+      description: A calendar date in YYYYMMDD form.
+      schema:
+        type: string
+  responses:
+    AsyncAccepted:
+      description: >-
+        The asynchronous write request was accepted and queued. The response
+        contains a requestId; the final outcome is delivered to the configured
+        callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
+    BadRequest:
+      description: The request was malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    Callback:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The HTTPS URL to which asynchronous notifications are POSTed.
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Territory:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        timeZone:
+          type: string
+    PlanningRange:
+      type: object
+      properties:
+        from:
+          type: string
+          description: Start date of the planning range (YYYYMMDD).
+        to:
+          type: string
+          description: End date of the planning range (YYYYMMDD).
+    Depot:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+    Region:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+    Driver:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        mobileFutureDays:
+          type: integer
+        deployment:
+          type: string
+    Vehicle:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        departureDepotId:
+          type: string
+        arrivalDepotId:
+          type: string
+        startTime:
+          type: integer
+          description: Earliest start time in seconds from midnight.
+        endTime:
+          type: integer
+          description: Latest end time in seconds from midnight.
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        eligibility:
+          type: object
+          description: Constraints on which days/vehicles can serve this order.
+        forceVehicleId:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderStep'
+    OrderStep:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - pickup
+            - delivery
+        location:
+          $ref: '#/components/schemas/Location'
+        serviceTime:
+          type: integer
+          description: Service time in seconds.
+        timeWindows:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeWindow'
+    TimeWindow:
+      type: object
+      properties:
+        startSec:
+          type: integer
+        endSec:
+          type: integer
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    Route:
+      type: object
+      properties:
+        routeId:
+          type: string
+        date:
+          type: string
+        vehicleId:
+          type: string
+        driverId:
+          type: string
+        approved:
+          type: boolean
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteStep'
+    RouteStep:
+      type: object
+      properties:
+        orderId:
+          type: string
+        type:
+          type: string
+        plannedArrivalSec:
+          type: integer
+          description: Planned time of arrival, seconds from midnight.
+        plannedDepartureSec:
+          type: integer
+        location:
+          $ref: '#/components/schemas/Location'
+    GpsPosition:
+      type: object
+      properties:
+        driverId:
+          type: string
+        vehicleId:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        speed:
+          type: number
+          format: double
+        timestamp:
+          type: string
+          format: date-time
+    ContactValidationRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+    ContactValidationResult:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              valid:
+                type: boolean
+        phoneNumbers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              valid:
+                type: boolean

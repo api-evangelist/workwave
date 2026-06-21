@@ -1,0 +1,110 @@
+aid: workwave
+url: https://raw.githubusercontent.com/api-evangelist/workwave/refs/heads/main/apis.yml
+name: WorkWave
+kind: company
+description: WorkWave builds field-service and last-mile delivery software for service
+  professionals in pest control, lawn care, cleaning, security, and delivery. Its
+  RouteManager product exposes the WorkWave Route Manager (WWRM) REST API for
+  managing territories, depots, drivers, vehicles, orders, route optimization, time
+  of arrival, and GPS tracking, with API-key authentication and webhook callbacks.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Field Service
+- Route Optimization
+- Last Mile Delivery
+- Fleet
+- GPS Tracking
+- Logistics
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: workwave:route-manager-orders-routes
+  name: WorkWave Route Manager - Orders, Routes & Territories
+  tags:
+  - Orders
+  - Routes
+  - Territories
+  - Route Optimization
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://wwrm.workwave.com/api/
+  baseURL: https://wwrm.workwave.com/api/v1
+  properties:
+  - url: https://wwrm.workwave.com/api/
+    type: Documentation
+  - url: https://wwrm.workwave.com/api/
+    type: APIReference
+  - url: openapi/workwave-openapi.yml
+    type: OpenAPI
+  description: Core RouteManager resources for managing territories, depots, regions,
+    companies, orders, and optimized routes (Time of Arrival). Write operations are
+    asynchronous and queued per territory, returning a requestId resolved via webhook
+    callback.
+- aid: workwave:route-manager-drivers-vehicles
+  name: WorkWave Route Manager - Drivers & Vehicles
+  tags:
+  - Drivers
+  - Vehicles
+  - Fleet
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://wwrm.workwave.com/api/
+  baseURL: https://wwrm.workwave.com/api/v1
+  properties:
+  - url: https://wwrm.workwave.com/api/
+    type: Documentation
+  - url: openapi/workwave-openapi.yml
+    type: OpenAPI
+  description: Manage the driver roster and vehicle fleet within a territory, including
+    per-vehicle and per-date settings used by the route optimizer.
+- aid: workwave:route-manager-gps-tracking
+  name: WorkWave Route Manager - GPS Tracking
+  tags:
+  - GPS Tracking
+  - Telematics
+  - Real Time Location
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://wwrm.workwave.com/api/
+  baseURL: https://wwrm.workwave.com/api/v1
+  properties:
+  - url: https://wwrm.workwave.com/api/
+    type: Documentation
+  - url: openapi/workwave-openapi.yml
+    type: OpenAPI
+  description: Retrieve GPS tracking and real-time location data for drivers and
+    vehicles, integrating telematics providers such as Verizon Connect, Linxup,
+    Azuga, and any Geotab-powered GPS provider.
+- aid: workwave:route-manager-webhooks
+  name: WorkWave Route Manager - Webhooks
+  tags:
+  - Webhooks
+  - Callbacks
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://wwrm.workwave.com/api/
+  baseURL: https://wwrm.workwave.com/api/v1
+  properties:
+  - url: https://wwrm.workwave.com/api/
+    type: Documentation
+  - url: openapi/workwave-openapi.yml
+    type: OpenAPI
+  description: Register and manage the HTTP callback (webhook) URL that receives
+    asynchronous notifications for completed write operations, data changes, and
+    route approvals, with automatic retries on delivery failure.
+common:
+- type: GitHubOrganization
+  url: https://github.com/WorkWave
+- type: LinkedIn
+  url: https://www.linkedin.com/company/workwave
+- type: Website
+  url: https://www.workwave.com
+- type: Documentation
+  url: https://wwrm.workwave.com/api/
+- type: Plans
+  url: plans/workwave-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/workwave-rate-limits.yml
+- type: FinOps
+  url: finops/workwave-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

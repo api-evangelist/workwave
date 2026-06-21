@@ -1,0 +1,359 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{wwrmApiKey}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Callback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the configured callback URL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/callback"
+          },
+          "docs": "Retrieve the configured webhook callback URL."
+        },
+        {
+          "info": {
+            "name": "Set or update the callback URL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/callback",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"url\": \"https://example.com/wwrm-callback\"\n}"
+            }
+          },
+          "docs": "Set or update the webhook callback URL for asynchronous notifications."
+        },
+        {
+          "info": {
+            "name": "Remove the callback URL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/callback"
+          },
+          "docs": "Remove the configured webhook callback URL."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Territories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all territories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories"
+          },
+          "docs": "List all territories accessible to the API key."
+        },
+        {
+          "info": {
+            "name": "Edit a territory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit a territory's preferences."
+        },
+        {
+          "info": {
+            "name": "Modify planning range.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/planningrange",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify the planning range of a territory."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/orders"
+          },
+          "docs": "List orders in a territory."
+        },
+        {
+          "info": {
+            "name": "Add orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/orders",
+            "body": {
+              "type": "json",
+              "data": "[]"
+            }
+          },
+          "docs": "Add one or more orders (asynchronous)."
+        },
+        {
+          "info": {
+            "name": "Update orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/orders",
+            "body": {
+              "type": "json",
+              "data": "[]"
+            }
+          },
+          "docs": "Update one or more orders (asynchronous)."
+        },
+        {
+          "info": {
+            "name": "Delete orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/orders"
+          },
+          "docs": "Delete one or more orders (asynchronous)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List optimized routes (TOA).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/toa/routes"
+          },
+          "docs": "List optimized routes with Time of Arrival data."
+        },
+        {
+          "info": {
+            "name": "Get an optimized route.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/toa/routes/{{routeId}}"
+          },
+          "docs": "Retrieve a single optimized route with Time of Arrival details."
+        },
+        {
+          "info": {
+            "name": "List approved routes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/approved/routes"
+          },
+          "docs": "Retrieve approved route plan data for a territory."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Drivers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List drivers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/drivers"
+          },
+          "docs": "List drivers in a territory."
+        },
+        {
+          "info": {
+            "name": "Add driver.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/drivers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a driver (asynchronous)."
+        },
+        {
+          "info": {
+            "name": "Replace driver.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/drivers/{{driverId}}",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a driver (asynchronous)."
+        },
+        {
+          "info": {
+            "name": "Delete driver.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/drivers/{{driverId}}"
+          },
+          "docs": "Delete a driver (asynchronous)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Vehicles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List vehicles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/vehicles"
+          },
+          "docs": "List vehicles in a territory."
+        },
+        {
+          "info": {
+            "name": "Add vehicles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/vehicles",
+            "body": {
+              "type": "json",
+              "data": "[]"
+            }
+          },
+          "docs": "Add one or more vehicles (asynchronous)."
+        },
+        {
+          "info": {
+            "name": "Get vehicle settings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/vehicles/{{vehicleId}}"
+          },
+          "docs": "Get a vehicle's normal-day settings."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GPS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get GPS tracking data.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/gps"
+          },
+          "docs": "Retrieve GPS tracking and real-time location data for a territory."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate contacts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/{{territoryId}}/validation/contacts",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"emails\": [],\n  \"phoneNumbers\": []\n}"
+            }
+          },
+          "docs": "Validate emails and phone numbers."
+        }
+      ]
+    }
+  ]
+}

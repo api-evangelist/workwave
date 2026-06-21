@@ -1,0 +1,98 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: WorkWave
+providerId: workwave
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Field Service
+- Route Optimization
+- Last Mile Delivery
+- Fleet
+- GPS Tracking
+- Logistics
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of WorkWave RouteManager spend. WorkWave sells RouteManager
+  through a sales-led subscription model with no published list pricing; the
+  Route Manager (WWRM) API is included with a RouteManager subscription rather
+  than billed per call. Because list rates and metering details are not
+  publicly documented, the cost model here is not reconciled and should be
+  confirmed against a WorkWave quote, order form, or invoice.
+notes: >-
+  Pricing is sales-led and not published. Confirm subscription terms, included
+  territory/seat counts, and any overage charges with WorkWave during
+  reconciliation.
+sources:
+- https://www.workwave.com/route-manager/
+- https://www.route-manager.com/api/
+- https://wwrm.workwave.com/api/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: WorkWave
+serviceCategory: Field Service and Logistics Software
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: WorkWave RouteManager
+  ServiceCategory: Field Service and Logistics Software
+  ProviderName: WorkWave
+  PublisherName: WorkWave
+  InvoiceIssuerName: WorkWave
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: routemanager_subscription
+  description: RouteManager subscription seats/territories under a sales-negotiated contract.
+  unit: subscription
+  aggregation: sum
+  dimensions:
+  - account
+  - territory
+- name: territories
+  description: Number of active territories under the subscription, a primary scoping unit of the API.
+  unit: territories
+  aggregation: sum
+  dimensions:
+  - account
+- name: vehicles
+  description: Vehicles managed in the fleet, a common driver of routing scale and cost.
+  unit: vehicles
+  aggregation: sum
+  dimensions:
+  - account
+  - territory
+- name: orders
+  description: Orders routed and optimized, a primary throughput driver for the platform.
+  unit: orders
+  aggregation: sum
+  dimensions:
+  - account
+  - territory
+principles:
+- name: Visibility
+  description: Obtain the WorkWave order form / invoice; track active territories, vehicles, and seats against contracted entitlements.
+- name: Allocation
+  description: Map territories and fleets to internal cost centers, branches, or business units.
+- name: Optimization
+  description: Right-size territory and vehicle counts to actual routing volume; consolidate underused territories to reduce subscription cost.
+- name: Accountability
+  description: Assign owners per territory/branch and review utilization against the contract at renewal.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

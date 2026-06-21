@@ -1,0 +1,81 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: WorkWave
+providerId: workwave
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Field Service
+- Route Optimization
+- Last Mile Delivery
+- Fleet
+- GPS Tracking
+- Logistics
+- Plans
+description: >-
+  WorkWave RouteManager is sold through a sales-led model. The product and API
+  pages do not publish public per-seat or per-call list pricing; prospective
+  customers are directed to contact WorkWave sales (e.g., (866) 497-4993) for a
+  quote and demo. The Route Manager REST API is available to RouteManager
+  subscribers and is enabled per account; specific subscription tiers and
+  prices are not publicly documented and are not reconciled in this artifact.
+notes: >-
+  Pricing is not published. Values below are placeholders describing the known
+  sales-led commercial model; reconcile against a WorkWave quote or contract
+  when available.
+sources:
+- https://www.workwave.com/route-manager/
+- https://www.route-manager.com/api/
+- https://wwrm.workwave.com/api/
+plans:
+- id: workwave-routemanager-subscription
+  name: RouteManager Subscription
+  type: subscription
+  description: >-
+    Subscription to WorkWave RouteManager, which includes access to the Route
+    Manager (WWRM) REST API for integrating order, route, fleet, and GPS data.
+    Pricing is quoted by WorkWave sales.
+  entries:
+  - label: RouteManager Subscription
+    name: routemanager_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Route Optimization
+  - name: Orders & Territories API
+  - name: Drivers & Vehicles API
+  - name: Time of Arrival Routes
+  - name: GPS Tracking
+  - name: Webhook Callbacks
+- id: workwave-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Volume and multi-territory agreements with negotiated terms, telematics
+    integrations, and dedicated support. Contact WorkWave sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Custom Volume Pricing
+  - name: Telematics Integrations
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,250 @@
+{
+  "info": {
+    "name": "WorkWave Route Manager API",
+    "description": "WorkWave Route Manager (WWRM) REST API. Authentication uses an API key (UUID) supplied via the X-WorkWave-Key header (or the `key` query parameter). Write requests are asynchronous and return a requestId; results are delivered to a configured webhook callback URL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "X-WorkWave-Key", "type": "string" },
+      { "key": "value", "value": "{{wwrmApiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://wwrm.workwave.com/api/v1" },
+    { "key": "wwrmApiKey", "value": "123e4567-e89b-12d3-a456-426655440000" },
+    { "key": "territoryId", "value": "" },
+    { "key": "driverId", "value": "" },
+    { "key": "vehicleId", "value": "" },
+    { "key": "routeId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Callback",
+      "item": [
+        {
+          "name": "Retrieve the configured callback URL.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/callback", "host": ["{{baseUrl}}"], "path": ["callback"] }
+          }
+        },
+        {
+          "name": "Set or update the callback URL.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"url\": \"https://example.com/wwrm-callback\"\n}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/callback", "host": ["{{baseUrl}}"], "path": ["callback"] }
+          }
+        },
+        {
+          "name": "Remove the callback URL.",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/callback", "host": ["{{baseUrl}}"], "path": ["callback"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Territories",
+      "item": [
+        {
+          "name": "List all territories.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories", "host": ["{{baseUrl}}"], "path": ["territories"] }
+          }
+        },
+        {
+          "name": "Edit a territory.",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}"] }
+          }
+        },
+        {
+          "name": "Modify planning range.",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/planningrange", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "planningrange"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "List orders.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/orders", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "orders"] }
+          }
+        },
+        {
+          "name": "Add orders.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[]", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/orders", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "orders"] }
+          }
+        },
+        {
+          "name": "Update orders.",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[]", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/orders", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "orders"] }
+          }
+        },
+        {
+          "name": "Delete orders.",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/orders", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "orders"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Routes",
+      "item": [
+        {
+          "name": "List optimized routes (TOA).",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/toa/routes", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "toa", "routes"] }
+          }
+        },
+        {
+          "name": "Get an optimized route.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/toa/routes/{{routeId}}", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "toa", "routes", "{{routeId}}"] }
+          }
+        },
+        {
+          "name": "List approved routes.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/approved/routes", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "approved", "routes"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Drivers",
+      "item": [
+        {
+          "name": "List drivers.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/drivers", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "drivers"] }
+          }
+        },
+        {
+          "name": "Add driver.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/drivers", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "drivers"] }
+          }
+        },
+        {
+          "name": "Replace driver.",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/drivers/{{driverId}}", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "drivers", "{{driverId}}"] }
+          }
+        },
+        {
+          "name": "Delete driver.",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/drivers/{{driverId}}", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "drivers", "{{driverId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vehicles",
+      "item": [
+        {
+          "name": "List vehicles.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/vehicles", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "vehicles"] }
+          }
+        },
+        {
+          "name": "Add vehicles.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[]", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/vehicles", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "vehicles"] }
+          }
+        },
+        {
+          "name": "Get vehicle settings.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/vehicles/{{vehicleId}}", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "vehicles", "{{vehicleId}}"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GPS",
+      "item": [
+        {
+          "name": "Get GPS tracking data.",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/gps", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "gps"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Validation",
+      "item": [
+        {
+          "name": "Validate contacts.",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"emails\": [],\n  \"phoneNumbers\": []\n}", "options": { "raw": { "language": "json" } } },
+            "url": { "raw": "{{baseUrl}}/territories/{{territoryId}}/validation/contacts", "host": ["{{baseUrl}}"], "path": ["territories", "{{territoryId}}", "validation", "contacts"] }
+          }
+        }
+      ]
+    }
+  ]
+}

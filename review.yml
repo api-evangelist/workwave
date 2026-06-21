@@ -1,0 +1,104 @@
+aid: workwave
+name: WorkWave
+review:
+  question: Does WorkWave Route Manager expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    The WorkWave Route Manager API delivers asynchronous results via HTTP
+    callbacks (web-hooks): the platform POSTs notifications to a customer-
+    configured callback URL. This is an outbound HTTP push, not a streaming
+    transport. No HTTP Server-Sent Events (SSE) stream and no WebSocket
+    surface is documented, so no AsyncAPI document was created. The webhook
+    callback behavior is documented in the REST OpenAPI and review notes.
+findings:
+  summary: |
+    WorkWave Route Manager (WWRM) does not publish a documented public
+    WebSocket API. The API is a REST (HTTPS) interface under
+    https://wwrm.workwave.com/api/v1 authenticated with an API key (UUID)
+    supplied via the X-WorkWave-Key header or the `key` query parameter.
+    Write operations (POST/PUT/DELETE) are asynchronous: they return a
+    requestId immediately and the eventual outcome is delivered to a
+    customer-registered HTTP callback (web-hook) URL via an outbound POST.
+    Failed callbacks are retried up to 5 times at escalating intervals
+    (20, 40, 60, 80, 100 seconds). No realtime, bidirectional WebSocket
+    (ws:// or wss://) endpoint and no Server-Sent Events stream are
+    documented for orders, routes, drivers, vehicles, or GPS tracking.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://wwrm.workwave.com/api/v1
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP POST callbacks to a customer-configured URL for async results, data changes, and route approvals. Not a streaming or WebSocket transport.
+      documented: true
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events streaming endpoint is documented.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the WorkWave Route Manager API reference as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://wwrm.workwave.com/api/v1/callback
+    - POST   https://wwrm.workwave.com/api/v1/callback
+    - DELETE https://wwrm.workwave.com/api/v1/callback
+    - GET    https://wwrm.workwave.com/api/v1/companies
+    - POST   https://wwrm.workwave.com/api/v1/companies
+    - PUT    https://wwrm.workwave.com/api/v1/companies/{companyId}
+    - DELETE https://wwrm.workwave.com/api/v1/companies/{companyId}
+    - GET    https://wwrm.workwave.com/api/v1/territories
+    - PUT    https://wwrm.workwave.com/api/v1/territories/{territoryId}
+    - PUT    https://wwrm.workwave.com/api/v1/territories/{territoryId}/planningrange
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/simulations
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/depots
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/depots
+    - PUT    https://wwrm.workwave.com/api/v1/territories/{territoryId}/depots
+    - DELETE https://wwrm.workwave.com/api/v1/territories/{territoryId}/depots
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/regions
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/regions
+    - PUT    https://wwrm.workwave.com/api/v1/territories/{territoryId}/regions
+    - DELETE https://wwrm.workwave.com/api/v1/territories/{territoryId}/regions
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/drivers
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/drivers
+    - PUT    https://wwrm.workwave.com/api/v1/territories/{territoryId}/drivers
+    - PUT    https://wwrm.workwave.com/api/v1/territories/{territoryId}/drivers/{driverId}
+    - DELETE https://wwrm.workwave.com/api/v1/territories/{territoryId}/drivers/{driverId}
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles
+    - DELETE https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles/{vehicleId}
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles/{vehicleId}
+    - DELETE https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles/{vehicleId}
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles/{vehicleId}/{date}
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles/{vehicleId}/{date}
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/vehicles/{date}
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/orders
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/orders
+    - PUT    https://wwrm.workwave.com/api/v1/territories/{territoryId}/orders
+    - DELETE https://wwrm.workwave.com/api/v1/territories/{territoryId}/orders
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/toa/routes
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/toa/routes/{routeId}
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/approved/routes
+    - GET    https://wwrm.workwave.com/api/v1/territories/{territoryId}/gps
+    - POST   https://wwrm.workwave.com/api/v1/territories/{territoryId}/validation/contacts
+sources:
+  - url: https://wwrm.workwave.com/api/
+    type: APIReference
+    note: REST base URL https://wwrm.workwave.com/api/v1; API-key auth; async write requests with web-hook callbacks; no WebSocket mentioned.
+  - url: https://www.route-manager.com/api/
+    type: Documentation
+    note: Product page describes route optimization and GPS/telematics integration; references the API reference at wwrm.workwave.com/api/.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE streaming surface exists. The only asynchronous
+    delivery mechanism is outbound HTTP web-hook callbacks, which are modeled
+    as a Webhooks API entry in apis.yml and documented in the REST OpenAPI;
+    no AsyncAPI document was created because there is no streaming transport
+    to describe.

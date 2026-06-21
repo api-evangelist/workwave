@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: WorkWave
+providerId: workwave
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Field Service
+- Route Optimization
+- Last Mile Delivery
+- Fleet
+- GPS Tracking
+- Logistics
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The WorkWave Route Manager API throttles asynchronous write requests on a
+  per-territory basis. Write operations (POST/PUT/DELETE) are queued and
+  processed one at a time in FIFO order, with a documented maximum queue size
+  of 10 items per territory; exceeding the queue returns HTTP 429 Too Many
+  Requests. Additional rate limiting and throttling are applied per territory
+  and request type. Specific numeric limits beyond the queue size are not
+  publicly documented and are not reconciled in this artifact.
+notes: >-
+  Verify per-territory and per-request-type limits against current WorkWave
+  Route Manager API documentation and account configuration during
+  reconciliation.
+sources:
+- https://wwrm.workwave.com/api/
+responseCodes:
+  throttled: 429
+limits:
+- name: Async Write Queue (per territory)
+  scope: territory
+  metric: queued_requests
+  limit: 10
+  notes: >-
+    Asynchronous write requests are queued per territory and processed FIFO.
+    A maximum of 10 queued items per territory is allowed; exceeding it returns
+    429 Too Many Requests.
+- name: Per-Territory Throttling
+  scope: territory
+  metric: requests
+  limit: see provider documentation
+  notes: Rate limiting and throttling applied per territory and per request type.
+policies:
+- name: FIFO Queueing
+  description: >-
+    Write requests are queued per territory and processed one by one in
+    first-in-first-out order; the outcome is delivered to the configured
+    callback URL.
+- name: Backoff Strategy
+  description: >-
+    Clients should slow submission when receiving 429 responses and retry
+    once queued requests have drained.
+- name: Callback Retries
+  description: >-
+    Failed webhook callback deliveries are retried up to 5 times at escalating
+    intervals (20, 40, 60, 80, 100 seconds).
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
