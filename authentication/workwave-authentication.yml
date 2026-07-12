@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/workwave-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: ApiKeyHeader
+  type: apiKey
+  in: header
+  parameter: X-WorkWave-Key
+  description: API key (UUID) supplied via the X-WorkWave-Key HTTP header.
+  sources:
+  - openapi/workwave-openapi.yml
+- name: ApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: key
+  description: API key (UUID) supplied via the `key` query-string parameter. Takes precedence
+    over the header if both are present.
+  sources:
+  - openapi/workwave-openapi.yml

@@ -91,6 +91,12 @@ apis:
     asynchronous notifications for completed write operations, data changes, and
     route approvals, with automatic retries on delivery failure.
 common:
+- type: DomainSecurity
+  url: security/workwave-domain-security.yml
+- type: Authentication
+  url: authentication/workwave-authentication.yml
+- type: Blog
+  url: https://www.workwave.com/blog/
 - type: GitHubOrganization
   url: https://github.com/WorkWave
 - type: LinkedIn
