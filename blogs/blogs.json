@@ -1,0 +1,14 @@
+{
+  "repo": "workwave",
+  "feeds": [
+    {
+      "source": "https://www.workwave.com/blog/",
+      "feed_url": "https://www.workwave.com/blog/",
+      "title": "WorkWave Blog",
+      "saved": 0,
+      "error": "parse_failed"
+    }
+  ],
+  "fetched": "2026-07-11T11:43:46Z",
+  "post_count": 6
+}
