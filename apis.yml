@@ -91,6 +91,8 @@ apis:
     asynchronous notifications for completed write operations, data changes, and
     route approvals, with automatic retries on delivery failure.
 common:
+- type: AgenticAccess
+  url: agentic-access/workwave-agentic-access.yml
 - type: DomainSecurity
   url: security/workwave-domain-security.yml
 - type: Authentication
