@@ -1,0 +1,165 @@
+openapi: 3.0.1
+info:
+  title: WorkWave Route Manager Callback Orders API
+  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  termsOfService: https://www.workwave.com/terms-of-service/
+  contact:
+    name: WorkWave Support
+    url: https://www.workwave.com/contact-us/
+  version: '1.0'
+servers:
+- url: https://wwrm.workwave.com/api/v1
+  description: WorkWave Route Manager production API
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Orders
+  description: Manage orders within a territory.
+paths:
+  /territories/{territoryId}/orders:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listOrders
+      tags:
+      - Orders
+      summary: List orders in a territory.
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      operationId: addOrders
+      tags:
+      - Orders
+      summary: Add one or more orders.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    put:
+      operationId: updateOrders
+      tags:
+      - Orders
+      summary: Update one or more orders.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Order'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteOrders
+      tags:
+      - Orders
+      summary: Delete one or more orders.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+components:
+  schemas:
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        eligibility:
+          type: object
+          description: Constraints on which days/vehicles can serve this order.
+        forceVehicleId:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderStep'
+    OrderStep:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - pickup
+          - delivery
+        location:
+          $ref: '#/components/schemas/Location'
+        serviceTime:
+          type: integer
+          description: Service time in seconds.
+        timeWindows:
+          type: array
+          items:
+            $ref: '#/components/schemas/TimeWindow'
+    TimeWindow:
+      type: object
+      properties:
+        startSec:
+          type: integer
+        endSec:
+          type: integer
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
+  responses:
+    AsyncAccepted:
+      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-WorkWave-Key
+      description: API key (UUID) supplied via the X-WorkWave-Key HTTP header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: API key (UUID) supplied via the `key` query-string parameter. Takes precedence over the header if both are present.

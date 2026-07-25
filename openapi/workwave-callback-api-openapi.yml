@@ -1,0 +1,90 @@
+openapi: 3.0.1
+info:
+  title: WorkWave Route Manager Callback API
+  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  termsOfService: https://www.workwave.com/terms-of-service/
+  contact:
+    name: WorkWave Support
+    url: https://www.workwave.com/contact-us/
+  version: '1.0'
+servers:
+- url: https://wwrm.workwave.com/api/v1
+  description: WorkWave Route Manager production API
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Callback
+  description: Manage the webhook callback URL for asynchronous notifications.
+paths:
+  /callback:
+    get:
+      operationId: getCallback
+      tags:
+      - Callback
+      summary: Retrieve the configured callback URL.
+      responses:
+        '200':
+          description: The current callback configuration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Callback'
+    post:
+      operationId: setCallback
+      tags:
+      - Callback
+      summary: Set or update the callback URL for asynchronous notifications.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Callback'
+      responses:
+        '200':
+          description: Callback URL set.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+    delete:
+      operationId: deleteCallback
+      tags:
+      - Callback
+      summary: Remove the configured callback URL.
+      responses:
+        '200':
+          description: Callback URL removed.
+components:
+  schemas:
+    Callback:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The HTTPS URL to which asynchronous notifications are POSTed.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+  responses:
+    BadRequest:
+      description: The request was malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-WorkWave-Key
+      description: API key (UUID) supplied via the X-WorkWave-Key HTTP header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: API key (UUID) supplied via the `key` query-string parameter. Takes precedence over the header if both are present.

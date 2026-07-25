@@ -1,0 +1,153 @@
+openapi: 3.0.1
+info:
+  title: WorkWave Route Manager Callback Routes API
+  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  termsOfService: https://www.workwave.com/terms-of-service/
+  contact:
+    name: WorkWave Support
+    url: https://www.workwave.com/contact-us/
+  version: '1.0'
+servers:
+- url: https://wwrm.workwave.com/api/v1
+  description: WorkWave Route Manager production API
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Routes
+  description: Retrieve optimized routes and Time of Arrival data.
+paths:
+  /territories/{territoryId}/toa/routes:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listToaRoutes
+      tags:
+      - Routes
+      summary: List optimized routes (Time of Arrival) for a territory.
+      responses:
+        '200':
+          description: A list of optimized routes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+  /territories/{territoryId}/toa/routes/{routeId}:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    - name: routeId
+      in: path
+      required: true
+      description: Route identifier, typically in the form {routeId}-{date}.
+      schema:
+        type: string
+    get:
+      operationId: getToaRoute
+      tags:
+      - Routes
+      summary: Retrieve a single optimized route with Time of Arrival details.
+      responses:
+        '200':
+          description: The optimized route.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /territories/{territoryId}/approved/routes:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listApprovedRoutes
+      tags:
+      - Routes
+      summary: Retrieve approved route plan data for a territory.
+      responses:
+        '200':
+          description: A list of approved routes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+components:
+  schemas:
+    Route:
+      type: object
+      properties:
+        routeId:
+          type: string
+        date:
+          type: string
+        vehicleId:
+          type: string
+        driverId:
+          type: string
+        approved:
+          type: boolean
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteStep'
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    RouteStep:
+      type: object
+      properties:
+        orderId:
+          type: string
+        type:
+          type: string
+        plannedArrivalSec:
+          type: integer
+          description: Planned time of arrival, seconds from midnight.
+        plannedDepartureSec:
+          type: integer
+        location:
+          $ref: '#/components/schemas/Location'
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-WorkWave-Key
+      description: API key (UUID) supplied via the X-WorkWave-Key HTTP header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: API key (UUID) supplied via the `key` query-string parameter. Takes precedence over the header if both are present.

@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  title: WorkWave Route Manager Callback Validation API
+  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  termsOfService: https://www.workwave.com/terms-of-service/
+  contact:
+    name: WorkWave Support
+    url: https://www.workwave.com/contact-us/
+  version: '1.0'
+servers:
+- url: https://wwrm.workwave.com/api/v1
+  description: WorkWave Route Manager production API
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Validation
+  description: Validate contact emails and phone numbers.
+paths:
+  /territories/{territoryId}/validation/contacts:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    post:
+      operationId: validateContacts
+      tags:
+      - Validation
+      summary: Validate emails and phone numbers.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContactValidationRequest'
+      responses:
+        '200':
+          description: Validation results.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactValidationResult'
+components:
+  schemas:
+    ContactValidationRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        phoneNumbers:
+          type: array
+          items:
+            type: string
+    ContactValidationResult:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              valid:
+                type: boolean
+        phoneNumbers:
+          type: array
+          items:
+            type: object
+            properties:
+              value:
+                type: string
+              valid:
+                type: boolean
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-WorkWave-Key
+      description: API key (UUID) supplied via the X-WorkWave-Key HTTP header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: API key (UUID) supplied via the `key` query-string parameter. Takes precedence over the header if both are present.

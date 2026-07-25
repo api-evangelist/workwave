@@ -1,0 +1,215 @@
+openapi: 3.0.1
+info:
+  title: WorkWave Route Manager Callback Vehicles API
+  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  termsOfService: https://www.workwave.com/terms-of-service/
+  contact:
+    name: WorkWave Support
+    url: https://www.workwave.com/contact-us/
+  version: '1.0'
+servers:
+- url: https://wwrm.workwave.com/api/v1
+  description: WorkWave Route Manager production API
+security:
+- ApiKeyHeader: []
+- ApiKeyQuery: []
+tags:
+- name: Vehicles
+  description: Manage the vehicle fleet within a territory.
+paths:
+  /territories/{territoryId}/vehicles:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    get:
+      operationId: listVehicles
+      tags:
+      - Vehicles
+      summary: List vehicles in a territory.
+      responses:
+        '200':
+          description: A list of vehicles.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+    post:
+      operationId: addVehicles
+      tags:
+      - Vehicles
+      summary: Add one or more vehicles.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Vehicle'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteVehicles
+      tags:
+      - Vehicles
+      summary: Delete multiple vehicles.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/vehicles/{vehicleId}:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    - $ref: '#/components/parameters/vehicleId'
+    get:
+      operationId: getVehicle
+      tags:
+      - Vehicles
+      summary: Get a vehicle's normal-day settings.
+      responses:
+        '200':
+          description: Vehicle settings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+    post:
+      operationId: replaceVehicle
+      tags:
+      - Vehicles
+      summary: Replace a vehicle's normal-day settings.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+    delete:
+      operationId: deleteVehicle
+      tags:
+      - Vehicles
+      summary: Delete a single vehicle.
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/vehicles/{vehicleId}/{date}:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    - $ref: '#/components/parameters/vehicleId'
+    - $ref: '#/components/parameters/date'
+    get:
+      operationId: getVehicleForDate
+      tags:
+      - Vehicles
+      summary: Get a vehicle's settings for a specific date.
+      responses:
+        '200':
+          description: Vehicle settings for the date.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+    post:
+      operationId: replaceVehicleForDate
+      tags:
+      - Vehicles
+      summary: Replace a vehicle's settings for a specific date.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+      responses:
+        '200':
+          $ref: '#/components/responses/AsyncAccepted'
+  /territories/{territoryId}/vehicles/{date}:
+    parameters:
+    - $ref: '#/components/parameters/territoryId'
+    - $ref: '#/components/parameters/date'
+    get:
+      operationId: listVehiclesForDate
+      tags:
+      - Vehicles
+      summary: List all vehicle settings for a specific date.
+      responses:
+        '200':
+          description: Vehicle settings for the date.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+components:
+  schemas:
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
+    Vehicle:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        departureDepotId:
+          type: string
+        arrivalDepotId:
+          type: string
+        startTime:
+          type: integer
+          description: Earliest start time in seconds from midnight.
+        endTime:
+          type: integer
+          description: Latest end time in seconds from midnight.
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
+    date:
+      name: date
+      in: path
+      required: true
+      description: A calendar date in YYYYMMDD form.
+      schema:
+        type: string
+    vehicleId:
+      name: vehicleId
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    AsyncAccepted:
+      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
+  securitySchemes:
+    ApiKeyHeader:
+      type: apiKey
+      in: header
+      name: X-WorkWave-Key
+      description: API key (UUID) supplied via the X-WorkWave-Key HTTP header.
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: key
+      description: API key (UUID) supplied via the `key` query-string parameter. Takes precedence over the header if both are present.
