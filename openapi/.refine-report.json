@@ -1,0 +1,34 @@
+{
+  "provider": "workwave",
+  "sources": [
+    "workwave-callback-api-openapi.yml",
+    "workwave-companies-api-openapi.yml",
+    "workwave-depots-api-openapi.yml",
+    "workwave-drivers-api-openapi.yml",
+    "workwave-gps-api-openapi.yml",
+    "workwave-orders-api-openapi.yml",
+    "workwave-regions-api-openapi.yml",
+    "workwave-routes-api-openapi.yml",
+    "workwave-territories-api-openapi.yml",
+    "workwave-validation-api-openapi.yml",
+    "workwave-vehicles-api-openapi.yml"
+  ],
+  "outputs": [
+    "workwave-callback-api-openapi.yml",
+    "workwave-companies-api-openapi.yml",
+    "workwave-depots-api-openapi.yml",
+    "workwave-drivers-api-openapi.yml",
+    "workwave-gps-api-openapi.yml",
+    "workwave-orders-api-openapi.yml",
+    "workwave-regions-api-openapi.yml",
+    "workwave-routes-api-openapi.yml",
+    "workwave-territories-api-openapi.yml",
+    "workwave-validation-api-openapi.yml",
+    "workwave-vehicles-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
