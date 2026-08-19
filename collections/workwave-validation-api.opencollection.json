@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager Callback Validation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{X-WorkWave-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate emails and phone numbers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/validation/contacts",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate emails and phone numbers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

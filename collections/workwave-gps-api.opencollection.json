@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager Callback GPS API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{X-WorkWave-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GPS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve GPS tracking and real-time location data for a territory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/gps",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "Retrieve GPS tracking and real-time location data for a territory."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

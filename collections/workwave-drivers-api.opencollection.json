@@ -1,0 +1,143 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager Callback Drivers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{X-WorkWave-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Drivers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List drivers in a territory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/drivers",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "List drivers in a territory."
+        },
+        {
+          "info": {
+            "name": "Add a driver.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/drivers",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a driver."
+        },
+        {
+          "info": {
+            "name": "Update multiple drivers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/drivers",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update multiple drivers."
+        },
+        {
+          "info": {
+            "name": "Replace a driver.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/drivers/:driverId",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a driver."
+        },
+        {
+          "info": {
+            "name": "Delete a driver.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/drivers/:driverId",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "driverId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a driver."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

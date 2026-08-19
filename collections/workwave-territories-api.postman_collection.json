@@ -1,0 +1,354 @@
+{
+  "item": [
+    {
+      "id": "1edcc9c6-15e5-4780-b012-ac84a94b5453",
+      "name": "Territories",
+      "description": {
+        "content": "List and edit territories and their planning range.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b401ace9-a28b-4ad1-804e-b3e7ddac9157",
+          "name": "List all territories accessible to the API key.",
+          "request": {
+            "name": "List all territories accessible to the API key.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6cdcc28-4291-4453-8c05-dcd30b5cfc7d",
+              "name": "A list of territories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"timeZone\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"timeZone\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0031f42-27b0-46df-8b15-2453f1280f04",
+          "name": "Edit a territory's preferences.",
+          "request": {
+            "name": "Edit a territory's preferences.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3771b3f6-a745-4d84-b3af-1f7652b14511",
+              "name": "The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"timeZone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d9bb93b5-5314-4825-a626-c7f09f624d52",
+          "name": "Modify the planning range of a territory.",
+          "request": {
+            "name": "Modify the planning range of a territory.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "planningrange"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b3eb76bc-33bc-408b-bb0e-ed2c00d4821a",
+              "name": "The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "planningrange"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"from\": \"<string>\",\n  \"to\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wwrm.workwave.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-WorkWave-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "23086312-7070-48ac-b315-67d535033cce",
+    "name": "WorkWave Route Manager Callback Territories API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.\n\nContact Support:\n Name: WorkWave Support",
+      "type": "text/plain"
+    }
+  }
+}

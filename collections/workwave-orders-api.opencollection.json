@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager Callback Orders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{X-WorkWave-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List orders in a territory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/orders",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "List orders in a territory."
+        },
+        {
+          "info": {
+            "name": "Add one or more orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/orders",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more orders."
+        },
+        {
+          "info": {
+            "name": "Update one or more orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/orders",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update one or more orders."
+        },
+        {
+          "info": {
+            "name": "Delete one or more orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/orders",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "Delete one or more orders."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

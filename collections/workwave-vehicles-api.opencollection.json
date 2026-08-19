@@ -1,0 +1,252 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager Callback Vehicles API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{X-WorkWave-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List vehicles in a territory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "List vehicles in a territory."
+        },
+        {
+          "info": {
+            "name": "Add one or more vehicles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more vehicles."
+        },
+        {
+          "info": {
+            "name": "Delete multiple vehicles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "Delete multiple vehicles."
+        },
+        {
+          "info": {
+            "name": "Get a vehicle's normal-day settings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles/:vehicleId",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a vehicle's normal-day settings."
+        },
+        {
+          "info": {
+            "name": "Replace a vehicle's normal-day settings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles/:vehicleId",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a vehicle's normal-day settings."
+        },
+        {
+          "info": {
+            "name": "Delete a single vehicle.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles/:vehicleId",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a single vehicle."
+        },
+        {
+          "info": {
+            "name": "Get a vehicle's settings for a specific date.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles/:vehicleId/:date",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "A calendar date in YYYYMMDD form."
+              }
+            ]
+          },
+          "docs": "Get a vehicle's settings for a specific date."
+        },
+        {
+          "info": {
+            "name": "Replace a vehicle's settings for a specific date.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles/:vehicleId/:date",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "vehicleId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "A calendar date in YYYYMMDD form."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a vehicle's settings for a specific date."
+        },
+        {
+          "info": {
+            "name": "List all vehicle settings for a specific date.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/vehicles/:date",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "A calendar date in YYYYMMDD form."
+              }
+            ]
+          },
+          "docs": "List all vehicle settings for a specific date."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

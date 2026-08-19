@@ -1,0 +1,418 @@
+{
+  "item": [
+    {
+      "id": "780b63e8-20b2-4ef7-b3a6-211580260d1f",
+      "name": "Routes",
+      "description": {
+        "content": "Retrieve optimized routes and Time of Arrival data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "733a38d4-65bf-4c70-8e8f-140516d3a43d",
+          "name": "List optimized routes (Time of Arrival) for a territory.",
+          "request": {
+            "name": "List optimized routes (Time of Arrival) for a territory.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "toa",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d4d7ef0-b449-4816-83dc-fcb811c7a2de",
+              "name": "A list of optimized routes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "toa",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"routeId\": \"string\",\n    \"date\": \"string\",\n    \"vehicleId\": \"string\",\n    \"driverId\": \"string\",\n    \"approved\": false,\n    \"steps\": [\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 9376,\n        \"plannedDepartureSec\": 8444,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 1263.0589857925888,\n          \"longitude\": 3978.1555315430696\n        }\n      },\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 5818,\n        \"plannedDepartureSec\": 5877,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 6166.987997363504,\n          \"longitude\": 1888.6169991481438\n        }\n      }\n    ]\n  },\n  {\n    \"routeId\": \"string\",\n    \"date\": \"string\",\n    \"vehicleId\": \"string\",\n    \"driverId\": \"string\",\n    \"approved\": false,\n    \"steps\": [\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 901,\n        \"plannedDepartureSec\": 3051,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 3337.7854210812407,\n          \"longitude\": 4832.722153332525\n        }\n      },\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 7041,\n        \"plannedDepartureSec\": 4266,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 1606.8525097476215,\n          \"longitude\": 8664.07359524764\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdf11c7a-2462-4bf8-a5bd-76169d07c5ce",
+          "name": "Retrieve a single optimized route with Time of Arrival details.",
+          "request": {
+            "name": "Retrieve a single optimized route with Time of Arrival details.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "toa",
+                "routes",
+                ":routeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "routeId",
+                  "description": "(Required) Route identifier, typically in the form {routeId}-{date}."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb95c247-8441-419c-9898-be9f23774643",
+              "name": "The optimized route.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "toa",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) Route identifier, typically in the form {routeId}-{date}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"routeId\": \"string\",\n  \"date\": \"string\",\n  \"vehicleId\": \"string\",\n  \"driverId\": \"string\",\n  \"approved\": false,\n  \"steps\": [\n    {\n      \"orderId\": \"string\",\n      \"type\": \"string\",\n      \"plannedArrivalSec\": 5283,\n      \"plannedDepartureSec\": 9260,\n      \"location\": {\n        \"address\": \"string\",\n        \"latitude\": 7381.358737034702,\n        \"longitude\": 2401.482644911198\n      }\n    },\n    {\n      \"orderId\": \"string\",\n      \"type\": \"string\",\n      \"plannedArrivalSec\": 9314,\n      \"plannedDepartureSec\": 3830,\n      \"location\": {\n        \"address\": \"string\",\n        \"latitude\": 2462.912571370568,\n        \"longitude\": 4587.459944915563\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d9389b2-4381-483e-b072-6fd2680e912e",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "toa",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) Route identifier, typically in the form {routeId}-{date}."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e96f221-f491-4f3c-9cde-eee0a87a0294",
+          "name": "Retrieve approved route plan data for a territory.",
+          "request": {
+            "name": "Retrieve approved route plan data for a territory.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "approved",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fef5e6f8-4d24-4914-a339-02ea1c9dc74e",
+              "name": "A list of approved routes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "approved",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"routeId\": \"string\",\n    \"date\": \"string\",\n    \"vehicleId\": \"string\",\n    \"driverId\": \"string\",\n    \"approved\": false,\n    \"steps\": [\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 3979,\n        \"plannedDepartureSec\": 8060,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 7660.733145837478,\n          \"longitude\": 2640.628142422128\n        }\n      },\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 4792,\n        \"plannedDepartureSec\": 5092,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 1882.1063925872795,\n          \"longitude\": 9117.053459269364\n        }\n      }\n    ]\n  },\n  {\n    \"routeId\": \"string\",\n    \"date\": \"string\",\n    \"vehicleId\": \"string\",\n    \"driverId\": \"string\",\n    \"approved\": false,\n    \"steps\": [\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 3427,\n        \"plannedDepartureSec\": 4524,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 5536.508247717959,\n          \"longitude\": 2102.9047649574204\n        }\n      },\n      {\n        \"orderId\": \"string\",\n        \"type\": \"string\",\n        \"plannedArrivalSec\": 8882,\n        \"plannedDepartureSec\": 334,\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 9394.349928698737,\n          \"longitude\": 3536.2653651829633\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wwrm.workwave.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-WorkWave-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aa78007f-a7b0-4c97-9bda-f367e32d64e2",
+    "name": "WorkWave Route Manager Callback Routes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.\n\nContact Support:\n Name: WorkWave Support",
+      "type": "text/plain"
+    }
+  }
+}

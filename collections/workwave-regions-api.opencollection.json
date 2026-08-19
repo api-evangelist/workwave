@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager Callback Regions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{X-WorkWave-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List regions in a territory.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/regions",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "List regions in a territory."
+        },
+        {
+          "info": {
+            "name": "Add one or more regions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/regions",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add one or more regions."
+        },
+        {
+          "info": {
+            "name": "Replace one or more regions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/regions",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace one or more regions."
+        },
+        {
+          "info": {
+            "name": "Delete one or more regions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/territories/:territoryId/regions",
+            "params": [
+              {
+                "name": "territoryId",
+                "value": "",
+                "type": "path",
+                "description": "The territory identifier used by most calls."
+              }
+            ]
+          },
+          "docs": "Delete one or more regions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

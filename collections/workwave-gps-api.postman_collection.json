@@ -1,0 +1,144 @@
+{
+  "item": [
+    {
+      "id": "9cee4aad-0edb-451f-adbd-55c99b8e801d",
+      "name": "GPS",
+      "description": {
+        "content": "Retrieve GPS tracking and location data.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3d6be3b-2be9-4950-92a5-cfcd54a0a3a8",
+          "name": "Retrieve GPS tracking and real-time location data for a territory.",
+          "request": {
+            "name": "Retrieve GPS tracking and real-time location data for a territory.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "gps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7217d044-4a77-4789-abc6-d73154735577",
+              "name": "GPS tracking data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "gps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"driverId\": \"string\",\n    \"vehicleId\": \"string\",\n    \"latitude\": 2682.85769863727,\n    \"longitude\": 76.13156768913387,\n    \"speed\": 2509.0681918292703,\n    \"timestamp\": \"1967-02-04T10:18:21.019Z\"\n  },\n  {\n    \"driverId\": \"string\",\n    \"vehicleId\": \"string\",\n    \"latitude\": 2248.392505589922,\n    \"longitude\": 5668.163413314174,\n    \"speed\": 7216.363987244795,\n    \"timestamp\": \"1971-11-21T23:59:25.042Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wwrm.workwave.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-WorkWave-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1c5dcb17-2709-40e1-bf72-743cf6c52fa9",
+    "name": "WorkWave Route Manager Callback GPS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.\n\nContact Support:\n Name: WorkWave Support",
+      "type": "text/plain"
+    }
+  }
+}

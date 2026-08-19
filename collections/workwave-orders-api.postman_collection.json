@@ -1,0 +1,471 @@
+{
+  "item": [
+    {
+      "id": "d983c265-21ce-4580-be68-38424911e0b4",
+      "name": "Orders",
+      "description": {
+        "content": "Manage orders within a territory.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e67a9a1-1a08-40d3-9993-9b8de95d883e",
+          "name": "List orders in a territory.",
+          "request": {
+            "name": "List orders in a territory.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7ae057a-0f03-438c-ad58-013ae07e5554",
+              "name": "A list of orders.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"eligibility\": {},\n    \"forceVehicleId\": \"string\",\n    \"steps\": [\n      {\n        \"type\": \"pickup\",\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 2302.1861292636213,\n          \"longitude\": 7663.7958159478385\n        },\n        \"serviceTime\": 9973,\n        \"timeWindows\": [\n          {\n            \"startSec\": 6250,\n            \"endSec\": 6247\n          },\n          {\n            \"startSec\": 1192,\n            \"endSec\": 4866\n          }\n        ]\n      },\n      {\n        \"type\": \"delivery\",\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 9357.284150277235,\n          \"longitude\": 452.8645056406311\n        },\n        \"serviceTime\": 6897,\n        \"timeWindows\": [\n          {\n            \"startSec\": 2258,\n            \"endSec\": 3434\n          },\n          {\n            \"startSec\": 7448,\n            \"endSec\": 3607\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"eligibility\": {},\n    \"forceVehicleId\": \"string\",\n    \"steps\": [\n      {\n        \"type\": \"pickup\",\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 1723.4277650587194,\n          \"longitude\": 2956.7803365971968\n        },\n        \"serviceTime\": 3519,\n        \"timeWindows\": [\n          {\n            \"startSec\": 8784,\n            \"endSec\": 3935\n          },\n          {\n            \"startSec\": 4177,\n            \"endSec\": 68\n          }\n        ]\n      },\n      {\n        \"type\": \"delivery\",\n        \"location\": {\n          \"address\": \"string\",\n          \"latitude\": 8071.953038580187,\n          \"longitude\": 1168.0923249997188\n        },\n        \"serviceTime\": 6104,\n        \"timeWindows\": [\n          {\n            \"startSec\": 9893,\n            \"endSec\": 1688\n          },\n          {\n            \"startSec\": 1489,\n            \"endSec\": 7881\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d889ba1e-d45a-4170-85a9-f53404f2bfc5",
+          "name": "Add one or more orders.",
+          "request": {
+            "name": "Add one or more orders.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "181e8d0c-dae1-4c62-883f-4e02576f077e",
+              "name": "The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1432abda-50d4-43a1-86c2-d54cba39158b",
+          "name": "Update one or more orders.",
+          "request": {
+            "name": "Update one or more orders.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83fd934c-e785-4ab1-8399-03d8a3da4908",
+              "name": "The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"eligibility\": \"<object>\",\n    \"forceVehicleId\": \"<string>\",\n    \"steps\": [\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      },\n      {\n        \"type\": \"<string>\",\n        \"location\": {\n          \"address\": \"<string>\",\n          \"latitude\": \"<double>\",\n          \"longitude\": \"<double>\"\n        },\n        \"serviceTime\": \"<integer>\",\n        \"timeWindows\": [\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          },\n          {\n            \"startSec\": \"<integer>\",\n            \"endSec\": \"<integer>\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c46270cc-f398-4a9a-80d7-d1c0cbcc819f",
+          "name": "Delete one or more orders.",
+          "request": {
+            "name": "Delete one or more orders.",
+            "description": {},
+            "url": {
+              "path": [
+                "territories",
+                ":territoryId",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "territoryId",
+                  "description": "(Required) The territory identifier used by most calls."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ca1564c-c314-4e33-8661-6c8291a031a1",
+              "name": "The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "territories",
+                    ":territoryId",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "territoryId",
+                      "description": "(Required) The territory identifier used by most calls."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-WorkWave-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://wwrm.workwave.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-WorkWave-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fcc7c4a9-eb16-45fd-9571-84d9681fd3b6",
+    "name": "WorkWave Route Manager Callback Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.\n\nContact Support:\n Name: WorkWave Support",
+      "type": "text/plain"
+    }
+  }
+}

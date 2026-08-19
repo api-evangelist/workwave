@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorkWave Route Manager Callback Companies API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-WorkWave-Key",
+      "value": "{{X-WorkWave-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List companies.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://wwrm.workwave.com/api/v1/companies"
+          },
+          "docs": "List companies."
+        },
+        {
+          "info": {
+            "name": "Add a company.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://wwrm.workwave.com/api/v1/companies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a company."
+        },
+        {
+          "info": {
+            "name": "Replace a company.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://wwrm.workwave.com/api/v1/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace a company."
+        },
+        {
+          "info": {
+            "name": "Delete a company.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://wwrm.workwave.com/api/v1/companies/:companyId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a company."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
