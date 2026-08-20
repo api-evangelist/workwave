@@ -108,6 +108,8 @@ apis:
   humanURL: https://wwrm.workwave.com/api/
   baseURL: https://wwrm.workwave.com/api/v1
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
