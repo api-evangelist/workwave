@@ -201,6 +201,9 @@ apis:
   - type: APIReference
     url: https://wwrm.workwave.com/api/
 common:
+- type: CapabilityMap
+  url: capabilities/workwave-capability-edges.yml
+  name: WorkWave Business Capability Map
 - type: AgenticAccess
   url: agentic-access/workwave-agentic-access.yml
 - type: DomainSecurity
