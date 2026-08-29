@@ -7,6 +7,18 @@ description: WorkWave builds field-service and last-mile delivery software for s
   RouteManager product exposes the WorkWave Route Manager (WWRM) REST API for
   managing territories, depots, drivers, vehicles, orders, route optimization, time
   of arrival, and GPS tracking, with API-key authentication and webhook callbacks.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
