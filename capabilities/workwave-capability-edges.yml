@@ -11,8 +11,19 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 2
+edge_count: 3
 edges:
+- tag: Routes
+  spec_file: workwave-routes-api-openapi.yml
+  capability_id: BC-520.50
+  capability_id_l1: BC-520
+  capability_name: Logistics Operations Management
+  confidence: 0.85
+  evidence: listToaRoutes  List optimized routes (Time of Arrival) for a territory ... listApprovedRoutes  Retrieve
+    approved route plan data
+  reason: Route optimisation, time-of-arrival and approved route plans are core transport/route execution
+    planning within logistics operations management.
+  recovered_from: vertical-automotive-mobility-edges.json
 - tag: GPS
   spec_file: workwave-gps-api-openapi.yml
   capability_id: BC-2430.40
