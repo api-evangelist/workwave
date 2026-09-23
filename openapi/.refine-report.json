@@ -1,17 +1,7 @@
 {
   "provider": "workwave",
   "sources": [
-    "workwave-callback-api-openapi.yml",
-    "workwave-companies-api-openapi.yml",
-    "workwave-depots-api-openapi.yml",
-    "workwave-drivers-api-openapi.yml",
-    "workwave-gps-api-openapi.yml",
-    "workwave-orders-api-openapi.yml",
-    "workwave-regions-api-openapi.yml",
-    "workwave-routes-api-openapi.yml",
-    "workwave-territories-api-openapi.yml",
-    "workwave-validation-api-openapi.yml",
-    "workwave-vehicles-api-openapi.yml"
+    "_original/workwave-openapi.yml"
   ],
   "outputs": [
     "workwave-callback-api-openapi.yml",
@@ -29,6 +19,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "workwave-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "workwave-callback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-companies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-depots-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-drivers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-gps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-regions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-routes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-territories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workwave-vehicles-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

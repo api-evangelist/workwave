@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkWave Route Manager Callback Vehicles API
-  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  title: WorkWave Route Manager Vehicles API
+  description: The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine.
   termsOfService: https://www.workwave.com/terms-of-service/
   contact:
     name: WorkWave Support
@@ -24,7 +24,7 @@ paths:
       operationId: listVehicles
       tags:
       - Vehicles
-      summary: List vehicles in a territory.
+      summary: List vehicles in a territory
       responses:
         '200':
           description: A list of vehicles.
@@ -38,7 +38,7 @@ paths:
       operationId: addVehicles
       tags:
       - Vehicles
-      summary: Add one or more vehicles.
+      summary: Add one or more vehicles
       requestBody:
         required: true
         content:
@@ -54,7 +54,7 @@ paths:
       operationId: deleteVehicles
       tags:
       - Vehicles
-      summary: Delete multiple vehicles.
+      summary: Delete multiple vehicles
       responses:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
@@ -66,7 +66,7 @@ paths:
       operationId: getVehicle
       tags:
       - Vehicles
-      summary: Get a vehicle's normal-day settings.
+      summary: Get a vehicle's normal-day settings
       responses:
         '200':
           description: Vehicle settings.
@@ -78,7 +78,7 @@ paths:
       operationId: replaceVehicle
       tags:
       - Vehicles
-      summary: Replace a vehicle's normal-day settings.
+      summary: Replace a vehicle's normal-day settings
       requestBody:
         required: true
         content:
@@ -92,7 +92,7 @@ paths:
       operationId: deleteVehicle
       tags:
       - Vehicles
-      summary: Delete a single vehicle.
+      summary: Delete a single vehicle
       responses:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
@@ -105,7 +105,7 @@ paths:
       operationId: getVehicleForDate
       tags:
       - Vehicles
-      summary: Get a vehicle's settings for a specific date.
+      summary: Get a vehicle's settings for a specific date
       responses:
         '200':
           description: Vehicle settings for the date.
@@ -117,7 +117,7 @@ paths:
       operationId: replaceVehicleForDate
       tags:
       - Vehicles
-      summary: Replace a vehicle's settings for a specific date.
+      summary: Replace a vehicle's settings for a specific date
       requestBody:
         required: true
         content:
@@ -135,7 +135,7 @@ paths:
       operationId: listVehiclesForDate
       tags:
       - Vehicles
-      summary: List all vehicle settings for a specific date.
+      summary: List all vehicle settings for a specific date
       responses:
         '200':
           description: Vehicle settings for the date.
@@ -147,16 +147,6 @@ paths:
                   $ref: '#/components/schemas/Vehicle'
 components:
   schemas:
-    AsyncResponse:
-      type: object
-      description: Acknowledgement of an accepted asynchronous write request.
-      properties:
-        status:
-          type: string
-          example: OK
-        requestId:
-          type: string
-          description: Identifier used to correlate the eventual callback notification.
     Vehicle:
       type: object
       properties:
@@ -174,19 +164,29 @@ components:
         endTime:
           type: integer
           description: Latest end time in seconds from midnight.
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
   parameters:
-    territoryId:
-      name: territoryId
-      in: path
-      required: true
-      description: The territory identifier used by most calls.
-      schema:
-        type: string
     date:
       name: date
       in: path
       required: true
       description: A calendar date in YYYYMMDD form.
+      schema:
+        type: string
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
       schema:
         type: string
     vehicleId:

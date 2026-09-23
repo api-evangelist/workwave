@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkWave Route Manager Callback Routes API
-  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  title: WorkWave Route Manager Routes API
+  description: The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine.
   termsOfService: https://www.workwave.com/terms-of-service/
   contact:
     name: WorkWave Support
@@ -24,7 +24,7 @@ paths:
       operationId: listToaRoutes
       tags:
       - Routes
-      summary: List optimized routes (Time of Arrival) for a territory.
+      summary: List optimized routes (Time of Arrival) for a territory
       responses:
         '200':
           description: A list of optimized routes.
@@ -47,7 +47,7 @@ paths:
       operationId: getToaRoute
       tags:
       - Routes
-      summary: Retrieve a single optimized route with Time of Arrival details.
+      summary: Retrieve a single optimized route with Time of Arrival details
       responses:
         '200':
           description: The optimized route.
@@ -64,7 +64,7 @@ paths:
       operationId: listApprovedRoutes
       tags:
       - Routes
-      summary: Retrieve approved route plan data for a territory.
+      summary: Retrieve approved route plan data for a territory
       responses:
         '200':
           description: A list of approved routes.
@@ -75,7 +75,21 @@ paths:
                 items:
                   $ref: '#/components/schemas/Route'
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
     Route:
       type: object
       properties:
@@ -93,13 +107,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RouteStep'
-    Error:
+    Location:
       type: object
       properties:
-        status:
+        address:
           type: string
-        message:
-          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
     RouteStep:
       type: object
       properties:
@@ -114,17 +132,6 @@ components:
           type: integer
         location:
           $ref: '#/components/schemas/Location'
-    Location:
-      type: object
-      properties:
-        address:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
   parameters:
     territoryId:
       name: territoryId
@@ -133,13 +140,6 @@ components:
       description: The territory identifier used by most calls.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

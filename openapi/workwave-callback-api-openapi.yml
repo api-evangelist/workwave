@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: WorkWave Route Manager Callback API
-  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  description: The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine.
   termsOfService: https://www.workwave.com/terms-of-service/
   contact:
     name: WorkWave Support
@@ -22,7 +22,7 @@ paths:
       operationId: getCallback
       tags:
       - Callback
-      summary: Retrieve the configured callback URL.
+      summary: Retrieve the configured callback URL
       responses:
         '200':
           description: The current callback configuration.
@@ -34,7 +34,7 @@ paths:
       operationId: setCallback
       tags:
       - Callback
-      summary: Set or update the callback URL for asynchronous notifications.
+      summary: Set or update the callback URL for asynchronous notifications
       requestBody:
         required: true
         content:
@@ -50,11 +50,18 @@ paths:
       operationId: deleteCallback
       tags:
       - Callback
-      summary: Remove the configured callback URL.
+      summary: Remove the configured callback URL
       responses:
         '200':
           description: Callback URL removed.
 components:
+  responses:
+    BadRequest:
+      description: The request was malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Callback:
       type: object
@@ -70,13 +77,6 @@ components:
           type: string
         message:
           type: string
-  responses:
-    BadRequest:
-      description: The request was malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

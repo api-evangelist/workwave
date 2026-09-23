@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkWave Route Manager Callback Drivers API
-  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  title: WorkWave Route Manager Drivers API
+  description: The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine.
   termsOfService: https://www.workwave.com/terms-of-service/
   contact:
     name: WorkWave Support
@@ -24,7 +24,7 @@ paths:
       operationId: listDrivers
       tags:
       - Drivers
-      summary: List drivers in a territory.
+      summary: List drivers in a territory
       responses:
         '200':
           description: A list of drivers.
@@ -38,7 +38,7 @@ paths:
       operationId: addDriver
       tags:
       - Drivers
-      summary: Add a driver.
+      summary: Add a driver
       requestBody:
         required: true
         content:
@@ -52,7 +52,7 @@ paths:
       operationId: updateDrivers
       tags:
       - Drivers
-      summary: Update multiple drivers.
+      summary: Update multiple drivers
       requestBody:
         required: true
         content:
@@ -72,7 +72,7 @@ paths:
       operationId: replaceDriver
       tags:
       - Drivers
-      summary: Replace a driver.
+      summary: Replace a driver
       requestBody:
         required: true
         content:
@@ -86,22 +86,12 @@ paths:
       operationId: deleteDriver
       tags:
       - Drivers
-      summary: Delete a driver.
+      summary: Delete a driver
       responses:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
   schemas:
-    AsyncResponse:
-      type: object
-      description: Acknowledgement of an accepted asynchronous write request.
-      properties:
-        status:
-          type: string
-          example: OK
-        requestId:
-          type: string
-          description: Identifier used to correlate the eventual callback notification.
     Driver:
       type: object
       properties:
@@ -113,6 +103,16 @@ components:
           type: integer
         deployment:
           type: string
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
   parameters:
     driverId:
       name: driverId

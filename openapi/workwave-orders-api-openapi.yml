@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkWave Route Manager Callback Orders API
-  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  title: WorkWave Route Manager Orders API
+  description: The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine.
   termsOfService: https://www.workwave.com/terms-of-service/
   contact:
     name: WorkWave Support
@@ -24,7 +24,7 @@ paths:
       operationId: listOrders
       tags:
       - Orders
-      summary: List orders in a territory.
+      summary: List orders in a territory
       responses:
         '200':
           description: A list of orders.
@@ -38,7 +38,7 @@ paths:
       operationId: addOrders
       tags:
       - Orders
-      summary: Add one or more orders.
+      summary: Add one or more orders
       requestBody:
         required: true
         content:
@@ -54,7 +54,7 @@ paths:
       operationId: updateOrders
       tags:
       - Orders
-      summary: Update one or more orders.
+      summary: Update one or more orders
       requestBody:
         required: true
         content:
@@ -70,33 +70,12 @@ paths:
       operationId: deleteOrders
       tags:
       - Orders
-      summary: Delete one or more orders.
+      summary: Delete one or more orders
       responses:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
   schemas:
-    AsyncResponse:
-      type: object
-      description: Acknowledgement of an accepted asynchronous write request.
-      properties:
-        status:
-          type: string
-          example: OK
-        requestId:
-          type: string
-          description: Identifier used to correlate the eventual callback notification.
-    Location:
-      type: object
-      properties:
-        address:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
     Order:
       type: object
       properties:
@@ -130,6 +109,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TimeWindow'
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
     TimeWindow:
       type: object
       properties:

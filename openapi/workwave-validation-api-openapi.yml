@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: WorkWave Route Manager Callback Validation API
-  description: 'The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager''s route planning and optimization engine. It exposes resources for territories, depots, regions, companies, drivers, vehicles, orders, optimized routes (Time of Arrival), and GPS tracking. Requests that add, update, or delete data are asynchronous: they return a requestId immediately and the final outcome is delivered to a configured webhook callback URL. Authentication uses an API key (a UUID) passed either as the `key` query-string parameter or the `X-WorkWave-Key` HTTP header.'
+  title: WorkWave Route Manager Validation API
+  description: The WorkWave Route Manager (WWRM) REST API connects order-management systems to RouteManager's route planning and optimization engine.
   termsOfService: https://www.workwave.com/terms-of-service/
   contact:
     name: WorkWave Support
@@ -24,7 +24,7 @@ paths:
       operationId: validateContacts
       tags:
       - Validation
-      summary: Validate emails and phone numbers.
+      summary: Validate emails and phone numbers
       requestBody:
         required: true
         content:
@@ -40,17 +40,6 @@ paths:
                 $ref: '#/components/schemas/ContactValidationResult'
 components:
   schemas:
-    ContactValidationRequest:
-      type: object
-      properties:
-        emails:
-          type: array
-          items:
-            type: string
-        phoneNumbers:
-          type: array
-          items:
-            type: string
     ContactValidationResult:
       type: object
       properties:
@@ -72,6 +61,17 @@ components:
                 type: string
               valid:
                 type: boolean
+    ContactValidationRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        phoneNumbers:
+          type: array
+          items:
+            type: string
   parameters:
     territoryId:
       name: territoryId
