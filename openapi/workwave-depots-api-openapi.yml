@@ -75,15 +75,16 @@ paths:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
-  parameters:
-    territoryId:
-      name: territoryId
-      in: path
-      required: true
-      description: The territory identifier used by most calls.
-      schema:
-        type: string
   schemas:
+    Depot:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
     AsyncResponse:
       type: object
       description: Acknowledgement of an accepted asynchronous write request.
@@ -94,15 +95,6 @@ components:
         requestId:
           type: string
           description: Identifier used to correlate the eventual callback notification.
-    Depot:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        location:
-          $ref: '#/components/schemas/Location'
     Location:
       type: object
       properties:
@@ -114,6 +106,14 @@ components:
         longitude:
           type: number
           format: double
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
   responses:
     AsyncAccepted:
       description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.

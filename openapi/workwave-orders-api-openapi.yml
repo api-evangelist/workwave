@@ -75,23 +75,22 @@ paths:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
   schemas:
-    Order:
+    TimeWindow:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        eligibility:
-          type: object
-          description: Constraints on which days/vehicles can serve this order.
-        forceVehicleId:
-          type: string
-        steps:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderStep'
+        startSec:
+          type: integer
+        endSec:
+          type: integer
     OrderStep:
       type: object
       properties:
@@ -109,6 +108,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TimeWindow'
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        eligibility:
+          type: object
+          description: Constraints on which days/vehicles can serve this order.
+        forceVehicleId:
+          type: string
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderStep'
     AsyncResponse:
       type: object
       description: Acknowledgement of an accepted asynchronous write request.
@@ -130,21 +145,6 @@ components:
         longitude:
           type: number
           format: double
-    TimeWindow:
-      type: object
-      properties:
-        startSec:
-          type: integer
-        endSec:
-          type: integer
-  parameters:
-    territoryId:
-      name: territoryId
-      in: path
-      required: true
-      description: The territory identifier used by most calls.
-      schema:
-        type: string
   responses:
     AsyncAccepted:
       description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.

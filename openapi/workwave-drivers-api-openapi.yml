@@ -114,17 +114,17 @@ components:
           type: string
           description: Identifier used to correlate the eventual callback notification.
   parameters:
-    driverId:
-      name: driverId
-      in: path
-      required: true
-      schema:
-        type: string
     territoryId:
       name: territoryId
       in: path
       required: true
       description: The territory identifier used by most calls.
+      schema:
+        type: string
+    driverId:
+      name: driverId
+      in: path
+      required: true
       schema:
         type: string
   responses:

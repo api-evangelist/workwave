@@ -63,13 +63,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    Callback:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          description: The HTTPS URL to which asynchronous notifications are POSTed.
     Error:
       type: object
       properties:
@@ -77,6 +70,13 @@ components:
           type: string
         message:
           type: string
+    Callback:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The HTTPS URL to which asynchronous notifications are POSTed.
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
