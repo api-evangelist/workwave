@@ -76,6 +76,13 @@ paths:
                   $ref: '#/components/schemas/Route'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
     RouteStep:
       type: object
       properties:
@@ -90,6 +97,17 @@ components:
           type: integer
         location:
           $ref: '#/components/schemas/Location'
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
     Route:
       type: object
       properties:
@@ -107,24 +125,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RouteStep'
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    Location:
-      type: object
-      properties:
-        address:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     territoryId:
       name: territoryId
@@ -133,13 +140,6 @@ components:
       description: The territory identifier used by most calls.
       schema:
         type: string
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

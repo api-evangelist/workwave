@@ -35,14 +35,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/GpsPosition'
 components:
-  parameters:
-    territoryId:
-      name: territoryId
-      in: path
-      required: true
-      description: The territory identifier used by most calls.
-      schema:
-        type: string
   schemas:
     GpsPosition:
       type: object
@@ -63,6 +55,14 @@ components:
         timestamp:
           type: string
           format: date-time
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

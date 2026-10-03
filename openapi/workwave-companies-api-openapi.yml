@@ -72,21 +72,7 @@ paths:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
-  parameters:
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    Company:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
     AsyncResponse:
       type: object
       description: Acknowledgement of an accepted asynchronous write request.
@@ -97,6 +83,20 @@ components:
         requestId:
           type: string
           description: Identifier used to correlate the eventual callback notification.
+    Company:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
   responses:
     AsyncAccepted:
       description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.

@@ -147,11 +147,10 @@ paths:
                   $ref: '#/components/schemas/Vehicle'
 components:
   parameters:
-    territoryId:
-      name: territoryId
+    vehicleId:
+      name: vehicleId
       in: path
       required: true
-      description: The territory identifier used by most calls.
       schema:
         type: string
     date:
@@ -161,13 +160,31 @@ components:
       description: A calendar date in YYYYMMDD form.
       schema:
         type: string
-    vehicleId:
-      name: vehicleId
+    territoryId:
+      name: territoryId
       in: path
       required: true
+      description: The territory identifier used by most calls.
       schema:
         type: string
+  responses:
+    AsyncAccepted:
+      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
   schemas:
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
     Vehicle:
       type: object
       properties:
@@ -185,23 +202,6 @@ components:
         endTime:
           type: integer
           description: Latest end time in seconds from midnight.
-    AsyncResponse:
-      type: object
-      description: Acknowledgement of an accepted asynchronous write request.
-      properties:
-        status:
-          type: string
-          example: OK
-        requestId:
-          type: string
-          description: Identifier used to correlate the eventual callback notification.
-  responses:
-    AsyncAccepted:
-      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncResponse'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

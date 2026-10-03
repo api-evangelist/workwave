@@ -75,6 +75,13 @@ paths:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
+  responses:
+    AsyncAccepted:
+      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
   schemas:
     Depot:
       type: object
@@ -114,13 +121,6 @@ components:
       description: The territory identifier used by most calls.
       schema:
         type: string
-  responses:
-    AsyncAccepted:
-      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncResponse'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

@@ -40,17 +40,6 @@ paths:
                 $ref: '#/components/schemas/ContactValidationResult'
 components:
   schemas:
-    ContactValidationRequest:
-      type: object
-      properties:
-        emails:
-          type: array
-          items:
-            type: string
-        phoneNumbers:
-          type: array
-          items:
-            type: string
     ContactValidationResult:
       type: object
       properties:
@@ -72,6 +61,17 @@ components:
                 type: string
               valid:
                 type: boolean
+    ContactValidationRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        phoneNumbers:
+          type: array
+          items:
+            type: string
   parameters:
     territoryId:
       name: territoryId
