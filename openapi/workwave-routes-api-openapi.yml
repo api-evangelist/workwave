@@ -76,27 +76,6 @@ paths:
                   $ref: '#/components/schemas/Route'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
-    RouteStep:
-      type: object
-      properties:
-        orderId:
-          type: string
-        type:
-          type: string
-        plannedArrivalSec:
-          type: integer
-          description: Planned time of arrival, seconds from midnight.
-        plannedDepartureSec:
-          type: integer
-        location:
-          $ref: '#/components/schemas/Location'
     Location:
       type: object
       properties:
@@ -125,6 +104,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RouteStep'
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+    RouteStep:
+      type: object
+      properties:
+        orderId:
+          type: string
+        type:
+          type: string
+        plannedArrivalSec:
+          type: integer
+          description: Planned time of arrival, seconds from midnight.
+        plannedDepartureSec:
+          type: integer
+        location:
+          $ref: '#/components/schemas/Location'
   responses:
     NotFound:
       description: The requested resource was not found.

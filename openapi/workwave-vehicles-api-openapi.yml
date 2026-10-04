@@ -153,18 +153,18 @@ components:
       required: true
       schema:
         type: string
-    date:
-      name: date
-      in: path
-      required: true
-      description: A calendar date in YYYYMMDD form.
-      schema:
-        type: string
     territoryId:
       name: territoryId
       in: path
       required: true
       description: The territory identifier used by most calls.
+      schema:
+        type: string
+    date:
+      name: date
+      in: path
+      required: true
+      description: A calendar date in YYYYMMDD form.
       schema:
         type: string
   responses:
@@ -175,16 +175,6 @@ components:
           schema:
             $ref: '#/components/schemas/AsyncResponse'
   schemas:
-    AsyncResponse:
-      type: object
-      description: Acknowledgement of an accepted asynchronous write request.
-      properties:
-        status:
-          type: string
-          example: OK
-        requestId:
-          type: string
-          description: Identifier used to correlate the eventual callback notification.
     Vehicle:
       type: object
       properties:
@@ -202,6 +192,16 @@ components:
         endTime:
           type: integer
           description: Latest end time in seconds from midnight.
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

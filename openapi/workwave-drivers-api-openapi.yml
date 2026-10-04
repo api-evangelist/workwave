@@ -92,17 +92,17 @@ paths:
           $ref: '#/components/responses/AsyncAccepted'
 components:
   parameters:
-    driverId:
-      name: driverId
-      in: path
-      required: true
-      schema:
-        type: string
     territoryId:
       name: territoryId
       in: path
       required: true
       description: The territory identifier used by most calls.
+      schema:
+        type: string
+    driverId:
+      name: driverId
+      in: path
+      required: true
       schema:
         type: string
   responses:

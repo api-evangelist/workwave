@@ -55,21 +55,7 @@ paths:
         '200':
           description: Callback URL removed.
 components:
-  responses:
-    BadRequest:
-      description: The request was malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-        message:
-          type: string
     Callback:
       type: object
       properties:
@@ -77,6 +63,20 @@ components:
           type: string
           format: uri
           description: The HTTPS URL to which asynchronous notifications are POSTed.
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+        message:
+          type: string
+  responses:
+    BadRequest:
+      description: The request was malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

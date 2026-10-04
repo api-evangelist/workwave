@@ -76,6 +76,17 @@ paths:
           $ref: '#/components/responses/AsyncAccepted'
 components:
   schemas:
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
     OrderStep:
       type: object
       properties:
@@ -100,27 +111,6 @@ components:
           type: integer
         endSec:
           type: integer
-    AsyncResponse:
-      type: object
-      description: Acknowledgement of an accepted asynchronous write request.
-      properties:
-        status:
-          type: string
-          example: OK
-        requestId:
-          type: string
-          description: Identifier used to correlate the eventual callback notification.
-    Location:
-      type: object
-      properties:
-        address:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
     Order:
       type: object
       properties:
@@ -137,13 +127,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrderStep'
-  responses:
-    AsyncAccepted:
-      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncResponse'
+    AsyncResponse:
+      type: object
+      description: Acknowledgement of an accepted asynchronous write request.
+      properties:
+        status:
+          type: string
+          example: OK
+        requestId:
+          type: string
+          description: Identifier used to correlate the eventual callback notification.
   parameters:
     territoryId:
       name: territoryId
@@ -152,6 +145,13 @@ components:
       description: The territory identifier used by most calls.
       schema:
         type: string
+  responses:
+    AsyncAccepted:
+      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey
