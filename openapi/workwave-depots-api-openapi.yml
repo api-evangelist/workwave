@@ -76,17 +76,6 @@ paths:
           $ref: '#/components/responses/AsyncAccepted'
 components:
   schemas:
-    Location:
-      type: object
-      properties:
-        address:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
     Depot:
       type: object
       properties:
@@ -106,6 +95,24 @@ components:
         requestId:
           type: string
           description: Identifier used to correlate the eventual callback notification.
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+  responses:
+    AsyncAccepted:
+      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
   parameters:
     territoryId:
       name: territoryId
@@ -114,13 +121,6 @@ components:
       description: The territory identifier used by most calls.
       schema:
         type: string
-  responses:
-    AsyncAccepted:
-      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncResponse'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

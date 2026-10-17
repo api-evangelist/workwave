@@ -72,6 +72,20 @@ paths:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
+  responses:
+    AsyncAccepted:
+      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AsyncResponse'
+  parameters:
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
     AsyncResponse:
       type: object
@@ -90,20 +104,6 @@ components:
           type: string
         name:
           type: string
-  parameters:
-    companyId:
-      name: companyId
-      in: path
-      required: true
-      schema:
-        type: string
-  responses:
-    AsyncAccepted:
-      description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/AsyncResponse'
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

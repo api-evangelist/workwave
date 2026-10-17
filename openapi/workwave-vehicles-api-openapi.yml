@@ -146,27 +146,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/Vehicle'
 components:
-  parameters:
-    vehicleId:
-      name: vehicleId
-      in: path
-      required: true
-      schema:
-        type: string
-    territoryId:
-      name: territoryId
-      in: path
-      required: true
-      description: The territory identifier used by most calls.
-      schema:
-        type: string
-    date:
-      name: date
-      in: path
-      required: true
-      description: A calendar date in YYYYMMDD form.
-      schema:
-        type: string
   responses:
     AsyncAccepted:
       description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
@@ -202,6 +181,27 @@ components:
         requestId:
           type: string
           description: Identifier used to correlate the eventual callback notification.
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
+    vehicleId:
+      name: vehicleId
+      in: path
+      required: true
+      schema:
+        type: string
+    date:
+      name: date
+      in: path
+      required: true
+      description: A calendar date in YYYYMMDD form.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

@@ -67,15 +67,16 @@ paths:
         '200':
           $ref: '#/components/responses/AsyncAccepted'
 components:
-  parameters:
-    territoryId:
-      name: territoryId
-      in: path
-      required: true
-      description: The territory identifier used by most calls.
-      schema:
-        type: string
   schemas:
+    Territory:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        timeZone:
+          type: string
     PlanningRange:
       type: object
       properties:
@@ -95,15 +96,6 @@ components:
         requestId:
           type: string
           description: Identifier used to correlate the eventual callback notification.
-    Territory:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        timeZone:
-          type: string
   responses:
     AsyncAccepted:
       description: The asynchronous write request was accepted and queued. The response contains a requestId; the final outcome is delivered to the configured callback URL.
@@ -111,6 +103,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AsyncResponse'
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

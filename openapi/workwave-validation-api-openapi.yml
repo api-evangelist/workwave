@@ -39,7 +39,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ContactValidationResult'
 components:
+  parameters:
+    territoryId:
+      name: territoryId
+      in: path
+      required: true
+      description: The territory identifier used by most calls.
+      schema:
+        type: string
   schemas:
+    ContactValidationRequest:
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        phoneNumbers:
+          type: array
+          items:
+            type: string
     ContactValidationResult:
       type: object
       properties:
@@ -61,25 +80,6 @@ components:
                 type: string
               valid:
                 type: boolean
-    ContactValidationRequest:
-      type: object
-      properties:
-        emails:
-          type: array
-          items:
-            type: string
-        phoneNumbers:
-          type: array
-          items:
-            type: string
-  parameters:
-    territoryId:
-      name: territoryId
-      in: path
-      required: true
-      description: The territory identifier used by most calls.
-      schema:
-        type: string
   securitySchemes:
     ApiKeyHeader:
       type: apiKey

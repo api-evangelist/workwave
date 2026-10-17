@@ -76,17 +76,6 @@ paths:
                   $ref: '#/components/schemas/Route'
 components:
   schemas:
-    Location:
-      type: object
-      properties:
-        address:
-          type: string
-        latitude:
-          type: number
-          format: double
-        longitude:
-          type: number
-          format: double
     Route:
       type: object
       properties:
@@ -125,6 +114,17 @@ components:
           type: integer
         location:
           $ref: '#/components/schemas/Location'
+    Location:
+      type: object
+      properties:
+        address:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
   responses:
     NotFound:
       description: The requested resource was not found.
