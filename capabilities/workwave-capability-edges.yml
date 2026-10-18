@@ -12,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 4
 edges:
 - tag: Routes
   spec_file: workwave-routes-api-openapi.yml
@@ -25,6 +25,17 @@ edges:
   reason: Route optimisation, time-of-arrival and approved route plans are core transport/route execution
     planning within logistics operations management.
   recovered_from: vertical-automotive-mobility-edges.json
+- tag: Routes
+  spec_file: workwave-routes-api-openapi.yml
+  capability_id: BC-1050.20
+  capability_id_l1: BC-1050
+  capability_name: Service Dispatch Management
+  confidence: 0.8
+  evidence: GET /territories/{territoryId}/toa/routes  listToaRoutes  List optimized routes (Time of Arrival)
+    for a territory
+  reason: Retrieval of optimized and approved route plans with time-of-arrival detail is technician/driver
+    routing and dispatch planning, the core of Service Dispatch Management in a field-service/last-mile
+    context.
 - tag: GPS
   spec_file: workwave-gps-api-openapi.yml
   capability_id: BC-2430.40
