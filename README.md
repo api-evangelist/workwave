@@ -1,4 +1,4 @@
-# WorkWave (workwave)
+# WorkWave
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,117 +66,136 @@
 
 WorkWave builds field-service and last-mile delivery software for service professionals in pest control, lawn care, cleaning, security, and delivery. Its RouteManager product exposes the WorkWave Route Manager (WWRM) REST API for managing territories, depots, drivers, vehicles, orders, route optimization, time of arrival, and GPS tracking, with API-key authentication and webhook callbacks.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/workwave/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/workwave/refs/heads/main/apis.yml)
+**Areas:** Field Service · Route Optimization · Last Mile Delivery · Fleet · GPS Tracking · Logistics
 
-## Tags
+## WorkWave on APIs.io
 
-- Field Service
-- Route Optimization
-- Last Mile Delivery
-- Fleet
-- GPS Tracking
-- Logistics
+Everything profiled for WorkWave is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/workwave/](https://apis.io/providers/workwave/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (11)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [WorkWave Callback API](https://apis.io/apis/workwave/workwave-callback-api/) — Manage the webhook callback URL for asynchronous notifications.
+- [WorkWave Companies API](https://apis.io/apis/workwave/workwave-companies-api/) — Manage companies.
+- [WorkWave Depots API](https://apis.io/apis/workwave/workwave-depots-api/) — Manage depots within a territory.
+- [WorkWave Drivers API](https://apis.io/apis/workwave/workwave-drivers-api/) — Manage the driver roster within a territory.
+- [WorkWave GPS API](https://apis.io/apis/workwave/workwave-gps-api/) — Retrieve GPS tracking and location data.
+- [WorkWave Orders API](https://apis.io/apis/workwave/workwave-orders-api/) — Manage orders within a territory.
+- [WorkWave Regions API](https://apis.io/apis/workwave/workwave-regions-api/) — Manage regions within a territory.
+- [WorkWave Routes API](https://apis.io/apis/workwave/workwave-routes-api/) — Retrieve optimized routes and Time of Arrival data.
+- [WorkWave Territories API](https://apis.io/apis/workwave/workwave-territories-api/) — List and edit territories and their planning range.
+- [WorkWave Validation API](https://apis.io/apis/workwave/workwave-validation-api/) — Validate contact emails and phone numbers.
+- [WorkWave Vehicles API](https://apis.io/apis/workwave/workwave-vehicles-api/) — Manage the vehicle fleet within a territory.
 
-## APIs
+### Published properties
 
-### WorkWave Route Manager - Orders, Routes & Territories
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Core RouteManager resources for managing territories, depots, regions, companies, orders, and optimized routes (Time of Arrival). Write operations are asynchronous and queued per territory, returning a requestId resolved via webhook callback.
+#### Agentic access (1)
 
-- **Human URL:** [https://wwrm.workwave.com/api/](https://wwrm.workwave.com/api/)
-- **Base URL:** `https://wwrm.workwave.com/api/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Workwave Agentic Access](https://apis.io/agentic-access/workwave/workwave-agentic-access/)
 
-- Orders
-- Routes
-- Territories
-- Route Optimization
+#### Collections (12)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://wwrm.workwave.com/api/)
-- [API Reference](https://wwrm.workwave.com/api/)
-- [OpenAPI](openapi/workwave-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workwave.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workwave.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [WorkWave Route Manager API](https://apis.io/collections/workwave/open-workwave/)
+- [WorkWave Route Manager Callback API](https://apis.io/collections/workwave/open-workwave-callback-api/)
+- [WorkWave Route Manager Callback Companies API](https://apis.io/collections/workwave/open-workwave-companies-api/)
+- [WorkWave Route Manager Callback Depots API](https://apis.io/collections/workwave/open-workwave-depots-api/)
+- [WorkWave Route Manager Callback Drivers API](https://apis.io/collections/workwave/open-workwave-drivers-api/)
+- [WorkWave Route Manager Callback GPS API](https://apis.io/collections/workwave/open-workwave-gps-api/)
+- [WorkWave Route Manager Callback Orders API](https://apis.io/collections/workwave/open-workwave-orders-api/)
+- [WorkWave Route Manager Callback Regions API](https://apis.io/collections/workwave/open-workwave-regions-api/)
+- [WorkWave Route Manager Callback Routes API](https://apis.io/collections/workwave/open-workwave-routes-api/)
+- [WorkWave Route Manager Callback Territories API](https://apis.io/collections/workwave/open-workwave-territories-api/)
+- [WorkWave Route Manager Callback Validation API](https://apis.io/collections/workwave/open-workwave-validation-api/)
+- [WorkWave Route Manager Callback Vehicles API](https://apis.io/collections/workwave/open-workwave-vehicles-api/)
 
-### WorkWave Route Manager - Drivers & Vehicles
+#### Security (2)
 
-Manage the driver roster and vehicle fleet within a territory, including per-vehicle and per-date settings used by the route optimizer.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://wwrm.workwave.com/api/](https://wwrm.workwave.com/api/)
-- **Base URL:** `https://wwrm.workwave.com/api/v1`
+- [Workwave Authentication](https://apis.io/security/workwave/workwave-authentication/)
+- [Workwave Domain Security](https://apis.io/security/workwave/workwave-domain-security/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Drivers
-- Vehicles
-- Fleet
+Published plans, tiers and prices.
 
-#### Properties
+- [Workwave Plans Pricing](https://apis.io/plans/workwave/workwave-plans-pricing/)
 
-- [Documentation](https://wwrm.workwave.com/api/)
-- [OpenAPI](openapi/workwave-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workwave.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workwave.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### WorkWave Route Manager - GPS Tracking
+Published request limits.
 
-Retrieve GPS tracking and real-time location data for drivers and vehicles, integrating telematics providers such as Verizon Connect, Linxup, Azuga, and any Geotab-powered GPS provider.
+- [Workwave Rate Limits](https://apis.io/rate-limits/workwave/workwave-rate-limits/)
 
-- **Human URL:** [https://wwrm.workwave.com/api/](https://wwrm.workwave.com/api/)
-- **Base URL:** `https://wwrm.workwave.com/api/v1`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- GPS Tracking
-- Telematics
-- Real Time Location
+- [Workwave Finops](https://apis.io/finops/workwave/workwave-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://wwrm.workwave.com/api/)
-- [OpenAPI](openapi/workwave-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workwave.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workwave.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### WorkWave Route Manager - Webhooks
-
-Register and manage the HTTP callback (webhook) URL that receives asynchronous notifications for completed write operations, data changes, and route approvals, with automatic retries on delivery failure.
-
-- **Human URL:** [https://wwrm.workwave.com/api/](https://wwrm.workwave.com/api/)
-- **Base URL:** `https://wwrm.workwave.com/api/v1`
-
-#### Tags
-
-- Webhooks
-- Callbacks
-- Notifications
-
-#### Properties
-
-- [Documentation](https://wwrm.workwave.com/api/)
-- [OpenAPI](openapi/workwave-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/workwave.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/workwave.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/WorkWave)
-- [LinkedIn](https://www.linkedin.com/company/workwave)
 - [Website](https://www.workwave.com)
 - [Documentation](https://wwrm.workwave.com/api/)
-- [Plans](plans/workwave-plans-pricing.yml)
-- [Rate Limits](rate-limits/workwave-rate-limits.yml)
-- [Fin Ops](finops/workwave-finops.yml)
+- [Blog](https://www.workwave.com/blog/)
+- [GitHub](https://github.com/WorkWave)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 25.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 45.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 5.3 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/workwave/](https://apis.io/providers/workwave/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for WorkWave: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/workwave/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
